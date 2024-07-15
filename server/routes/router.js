@@ -7,6 +7,8 @@ const router = express.Router();
 //     console.log('connect');
 // })
 
+// register userdata
+
 router.post("/register", async(req,res)=>{
     console.log(req.body);
     const {name,email,age,mobile,work,add,des} = req.body;
@@ -25,7 +27,7 @@ router.post("/register", async(req,res)=>{
             const adduser = new users({
                 name,email,age,mobile,work,add,des
             });
-ClientSessionok
+
             await adduser.save();
             res.status(201).json(adduser);
             console.log(adduser);
@@ -36,6 +38,19 @@ ClientSessionok
         res.status(404).json(error)
     }  
 })
+
+
+// get userdata
+
+router.get("/getdata", async(req, res)=>{
+    try{
+        const userdata = await users.find();
+        res.status(201).json(userdata)
+        console.log(userdata)
+    }catch(error){
+        res.status(404).writableObjectMode
+    }
+});
 
 // delete
 // router.delete("/deleteuser/:id", async(req, res)=>{
